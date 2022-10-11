@@ -17,7 +17,7 @@ const initialState: HeroesState = {
 };
 
 export const fetchHeroes = createAsyncThunk<Hero[]>(
-  'heroes/fetch_Heroes',
+  'heroes/fetchHeroes',
   getHeroes,
 );
 

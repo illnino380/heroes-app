@@ -1,8 +1,8 @@
 /* eslint-disable import/extensions */
 /* eslint-disable no-console */
 import express from 'express';
-
 import mongoose from 'mongoose';
+import cors from 'cors';
 
 import { heroFormValidation } from './validations/heroForm.js';
 
@@ -17,6 +17,7 @@ mongoose.connect(
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 app.get('/heroes', HeroController.getAll);
 app.post('/heroes', heroFormValidation, HeroController.create);
