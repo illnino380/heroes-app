@@ -28,9 +28,9 @@ export const HeroForm: React.FC = () => {
   const [hero, setHero] = useState(heroState);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const isValidTextInput = (value: string, num: number) => {
-    if (value.length < num) {
-      setErrorMessage(`Input text field should contain more than ${num} characters and should be valid`);
+  const isValidTextInput = (value: string) => {
+    if (value.length < 3) {
+      setErrorMessage('Input text field should contain more than 3 characters and should be valid');
 
       return false;
     }
@@ -60,11 +60,11 @@ export const HeroForm: React.FC = () => {
 
   const isValidForm = () => {
     return (
-      isValidTextInput(hero.nickname, 2)
-        && isValidTextInput(hero.real_name, 3)
-        && isValidTextInput(hero.origin_description, 5)
-        && isValidTextInput(hero.superpowers, 5)
-        && isValidTextInput(hero.catch_phrase, 5)
+      isValidTextInput(hero.nickname)
+        && isValidTextInput(hero.real_name)
+        && isValidTextInput(hero.origin_description)
+        && isValidTextInput(hero.superpowers)
+        && isValidTextInput(hero.catch_phrase)
     );
   };
 
@@ -96,18 +96,6 @@ export const HeroForm: React.FC = () => {
       }}
       onSubmit={handleAddNewHero}
     >
-
-      <TextField
-        sx={{ placeSelf: 'center' }}
-        id="image-input"
-        label="Images"
-        type="text"
-        placeholder="Image URL"
-        value={hero.images.join(', ')}
-        onChange={(event) => (
-          handleNewHeroData('images', event.target.value)
-        )}
-      />
       <TextField
         sx={{ placeSelf: 'center' }}
         id="NickName-input"
@@ -118,6 +106,8 @@ export const HeroForm: React.FC = () => {
           handleNewHeroData('nickname', event.target.value)
         )}
         required
+        error={!!errorMessage && hero.nickname.length < 3}
+        helperText={(hero.nickname.length < 3) && errorMessage}
       />
       <TextField
         sx={{ placeSelf: 'center' }}
@@ -129,6 +119,8 @@ export const HeroForm: React.FC = () => {
           handleNewHeroData('real_name', event.target.value)
         )}
         required
+        error={!!errorMessage && hero.real_name.length < 3}
+        helperText={(hero.real_name.length < 3) && errorMessage}
       />
       <TextField
         sx={{ placeSelf: 'center' }}
@@ -140,6 +132,8 @@ export const HeroForm: React.FC = () => {
           handleNewHeroData('origin_description', event.target.value)
         )}
         required
+        error={!!errorMessage && hero.origin_description.length < 3}
+        helperText={(hero.origin_description.length < 3) && errorMessage}
       />
       <TextField
         sx={{ placeSelf: 'center' }}
@@ -151,6 +145,8 @@ export const HeroForm: React.FC = () => {
           handleNewHeroData('superpowers', event.target.value)
         )}
         required
+        error={!!errorMessage && hero.superpowers.length < 3}
+        helperText={(hero.superpowers.length < 3) && errorMessage}
       />
       <TextField
         sx={{ placeSelf: 'center' }}
@@ -162,6 +158,20 @@ export const HeroForm: React.FC = () => {
           handleNewHeroData('catch_phrase', event.target.value)
         )}
         required
+        error={!!errorMessage && hero.catch_phrase.length < 3}
+        helperText={(hero.catch_phrase.length < 3) && errorMessage}
+      />
+      <TextField
+        sx={{ placeSelf: 'center' }}
+        id="image-input"
+        label="Images"
+        multiline
+        maxRows={10}
+        placeholder="Image URL"
+        value={hero.images.join(', ')}
+        onChange={(event) => (
+          handleNewHeroData('images', event.target.value)
+        )}
       />
 
       <Button

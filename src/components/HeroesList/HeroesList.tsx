@@ -17,7 +17,6 @@ import React, { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks';
 import { heroesSelector } from '../../app/store';
-import { Hero } from '../../types/Hero';
 import { HeroDetails } from '../HeroDetails';
 import { HeroItem } from '../HeroItem';
 import { Loader } from '../Loader';
@@ -28,7 +27,6 @@ export const HeroesList: React.FC = () => {
 
   const { heroes, status } = useAppSelector(heroesSelector);
 
-  const [currentHero, setCurrentHero] = useState<Hero | null>(null);
   const [isShowDetails, setIsShowDetails] = useState(false);
 
   const heroesPerPage = 5;
@@ -112,9 +110,8 @@ export const HeroesList: React.FC = () => {
                 <HeroItem
                   hero={hero}
                   key={hero._id}
-                  onShowDetails={(selectedHero: Hero) => {
+                  onShowDetails={() => {
                     setIsShowDetails(true);
-                    setCurrentHero(selectedHero);
                   }}
                 />
               ))}
@@ -148,8 +145,8 @@ export const HeroesList: React.FC = () => {
         </Typography>
         <Typography variant="body2" color="text.secondary" align="center">
           {'Copyright © '}
-          <Link color="inherit" to="https://github.com/illnino380">
-            Your Website
+          <Link color="inherit" to="/">
+            Heroes App
           </Link>
           {' '}
           {new Date().getFullYear()}

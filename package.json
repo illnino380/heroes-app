@@ -37,7 +37,7 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "dev": "concurrently \"cd server && npm run start:dev\" \"npm run start\""
+    "dev": "concurrently \"cd server && npm install && npm run start:dev\" \"npm run start\""
   },
   "eslintConfig": {
     "extends": [

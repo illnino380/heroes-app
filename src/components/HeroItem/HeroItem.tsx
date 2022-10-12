@@ -11,7 +11,7 @@ import { Hero } from '../../types/Hero';
 
 interface Props {
   hero: Hero,
-  onShowDetails: (selectedHero: Hero) => void,
+  onShowDetails: () => void,
 }
 
 export const HeroItem: React.FC<Props> = (props) => {
@@ -21,7 +21,7 @@ export const HeroItem: React.FC<Props> = (props) => {
 
   const handleLearnMoreButton = () => {
     navigate(`/hero/${hero._id}`);
-    onShowDetails(hero);
+    onShowDetails();
   };
 
   return (
@@ -43,6 +43,7 @@ export const HeroItem: React.FC<Props> = (props) => {
           {hero.nickname}
         </Typography>
       </CardContent>
+
       <CardActions sx={{
         mt: 'auto',
       }}
@@ -51,7 +52,7 @@ export const HeroItem: React.FC<Props> = (props) => {
           size="small"
           onClick={handleLearnMoreButton}
         >
-          Learn More
+          Read More
         </Button>
       </CardActions>
     </Card>
