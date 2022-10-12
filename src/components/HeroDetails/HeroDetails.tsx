@@ -60,7 +60,8 @@ export const HeroDetails: React.FC = () => {
                 component="img"
                 alt={selectedHero.nickname}
                 height="400"
-                image={selectedHero.images[0]}
+                image={selectedHero?.images[0] || 'quotation.jpg'}
+                sx={{ objectFit: 'contain' }}
               />
               <CardContent sx={{
                 display: 'flex',
@@ -73,9 +74,6 @@ export const HeroDetails: React.FC = () => {
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   {`Real name: ${selectedHero.real_name}`}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {`Origin description: ${selectedHero.origin_description}`}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   {`Origin description: ${selectedHero.origin_description}`}

@@ -6,5 +6,5 @@ export const heroFormValidation = [
   body('origin_description', 'original description length should be min 5 chars').isLength({ min: 3 }),
   body('superpowers', 'superpowers length should be min 5 chars').isLength({ min: 3 }),
   body('catch_phrase', 'catch phrase length should be min 5 chars').isLength({ min: 3 }),
-  body('images', 'use correct image URL').optional().isArray().isURL(),
+  body('images', 'use correct image URL').isArray().isURL().optional(),
 ];

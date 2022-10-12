@@ -27,15 +27,33 @@ export const HeroForm: React.FC = () => {
   const navigate = useNavigate();
   const [hero, setHero] = useState(heroState);
   const [errorMessage, setErrorMessage] = useState('');
+  const [errorUrlMessage, setErrorUrlMessage] = useState('');
 
   const isValidTextInput = (value: string) => {
     if (value.length < 3) {
-      setErrorMessage('Input text field should contain more than 3 characters and should be valid');
+      setErrorMessage('Input text field should contain more than 2 characters');
 
       return false;
     }
 
     return true;
+  };
+
+  const isValidUrls = (urls: string[]) => {
+    const urlRegex = (/(https?:\/\/.*\.(?:png|jpg))/i);
+    let isValid = false;
+
+    if (urls?.length) {
+      isValid = urls.every(url => urlRegex.test(url));
+    }
+
+    window.console.log(isValid);
+
+    if (!isValid) {
+      setErrorUrlMessage('Enter a valid image URL');
+    }
+
+    return isValid;
   };
 
   const handleNewHeroData = (field: string, value: string) => {
@@ -65,11 +83,13 @@ export const HeroForm: React.FC = () => {
         && isValidTextInput(hero.origin_description)
         && isValidTextInput(hero.superpowers)
         && isValidTextInput(hero.catch_phrase)
+        && isValidUrls(hero.images)
     );
   };
 
   const handleAddNewHero = (event: FormEvent) => {
     event.preventDefault();
+    window.console.log(errorUrlMessage);
 
     if (!isValidForm()) {
       return;
@@ -165,13 +185,14 @@ export const HeroForm: React.FC = () => {
         sx={{ placeSelf: 'center' }}
         id="image-input"
         label="Images"
-        multiline
-        maxRows={10}
         placeholder="Image URL"
         value={hero.images.join(', ')}
-        onChange={(event) => (
-          handleNewHeroData('images', event.target.value)
-        )}
+        onChange={(event) => {
+          handleNewHeroData('images', event.target.value);
+          setErrorUrlMessage('');
+        }}
+        error={!!errorUrlMessage}
+        helperText={errorUrlMessage}
       />
 
       <Button
@@ -181,6 +202,7 @@ export const HeroForm: React.FC = () => {
           || !hero.nickname
           || !hero.origin_description
           || !hero.real_name
+          || !hero.images?.length
         }
       >
         {heroId ? 'Edit hero' : 'Add hero'}

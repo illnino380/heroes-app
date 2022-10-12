@@ -35,7 +35,7 @@ export const HeroItem: React.FC<Props> = (props) => {
       <CardMedia
         component="img"
         height="200"
-        image={hero.images[0]}
+        image={hero?.images[0] ?? 'quotation.jpg'}
         alt={hero.nickname}
       />
       <CardContent>
