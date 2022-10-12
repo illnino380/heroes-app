@@ -1,6 +1,6 @@
 # Heroes List
 
-<img src="https://media.giphy.com/media/kMMGk8sQaGGb8smKAX/giphy.gif" width="100%"/>
+<img src="public\git2.gif" width="100%"/>
 
 ### Technologies used:
 
