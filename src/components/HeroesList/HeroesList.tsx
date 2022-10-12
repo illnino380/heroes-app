@@ -13,21 +13,23 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { useAppSelector } from '../../app/hooks';
 import { heroesSelector } from '../../app/store';
-import { fetchHeroes } from '../../features/HeroSlice';
+import { Hero } from '../../types/Hero';
+import { HeroDetails } from '../HeroDetails';
 import { HeroItem } from '../HeroItem';
 import { Loader } from '../Loader';
 
 export const HeroesList: React.FC = () => {
-  const dispatch = useAppDispatch();
-
   const theme = createTheme();
   const navigate = useNavigate();
 
   const { heroes, status } = useAppSelector(heroesSelector);
+
+  const [currentHero, setCurrentHero] = useState<Hero | null>(null);
+  const [isShowDetails, setIsShowDetails] = useState(false);
 
   const heroesPerPage = 5;
   const pages = useMemo(() => {
@@ -39,10 +41,6 @@ export const HeroesList: React.FC = () => {
   const indexOfLastHero = currentPage * heroesPerPage;
   const indexOfFirstHero = indexOfLastHero - heroesPerPage;
   const currentHeroes = heroes.slice(indexOfFirstHero, indexOfLastHero);
-
-  useEffect(() => {
-    dispatch(fetchHeroes());
-  }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -111,7 +109,14 @@ export const HeroesList: React.FC = () => {
               }}
             >
               {currentHeroes.map((hero) => (
-                <HeroItem hero={hero} key={hero._id} />
+                <HeroItem
+                  hero={hero}
+                  key={hero._id}
+                  onShowDetails={(selectedHero: Hero) => {
+                    setIsShowDetails(true);
+                    setCurrentHero(selectedHero);
+                  }}
+                />
               ))}
             </Grid>
           )}
@@ -124,6 +129,9 @@ export const HeroesList: React.FC = () => {
             onChange={(_, num) => setCurrentPage(num)}
           />
         </Container>
+        {isShowDetails && (
+          <HeroDetails />
+        )}
       </main>
       {/* Footer */}
       <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">

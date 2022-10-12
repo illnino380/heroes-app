@@ -11,15 +11,17 @@ import { Hero } from '../../types/Hero';
 
 interface Props {
   hero: Hero,
+  onShowDetails: (selectedHero: Hero) => void,
 }
 
 export const HeroItem: React.FC<Props> = (props) => {
-  const { hero } = props;
+  const { hero, onShowDetails } = props;
 
   const navigate = useNavigate();
 
   const handleLearnMoreButton = () => {
     navigate(`/hero/${hero._id}`);
+    onShowDetails(hero);
   };
 
   return (
