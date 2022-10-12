@@ -85,6 +85,16 @@ export const update = async (req, res) => {
   try {
     const heroId = req.params.id;
 
+    const document = {
+      _id: heroId,
+      nickname: req.body.nickname,
+      real_name: req.body.real_name,
+      origin_description: req.body.origin_description,
+      superpowers: req.body.superpowers,
+      catch_phrase: req.body.catch_phrase,
+      images: req.body.images,
+    };
+
     await HeroModel.updateOne(
       {
         _id: heroId,
@@ -99,9 +109,7 @@ export const update = async (req, res) => {
       },
     );
 
-    res.json({
-      success: true,
-    });
+    res.json(document);
   } catch (error) {
     console.log(error);
 
