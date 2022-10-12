@@ -1,9 +1,11 @@
 # Heroes List
 
+<img src="https://media.giphy.com/media/kMMGk8sQaGGb8smKAX/giphy.gif" width="100%"/>
+
 ### Technologies used:
 
 frontend:
-- React with Typescript
+- React with Typescript   
 - State managment library: Redux(Redux Toolkit)
 - CSS library: Material UI
 - Client requests: Axios
