@@ -4,15 +4,13 @@
 
 ### Description
 
-```
   A catalog of Superheroes with pagination.
-The user can view superhero cards, add new superheroes, edit the selected card and     delete a card or photo from the catalog. Each card has a detailed post with the possibility of editing and deleting information.
+The user can view superhero cards, add new superheroes, edit the selected card and delete a card or photo from the catalog. Each card has a detailed post with the possibility of editing and deleting information.
   
   The client and server parts of the application are implemented on the MERN-stack.
 
   The backend part is built on RestAPI principles with all CRUD operations of user interaction with the database and error catching. Line length verification is performed using the Express-Validator.
   The frontend part uses React with hooks and TypeScript.The storage is implemented through a Redux toolkit with async thunks. Client requests to the server are made using the Axios library. The design is built by CSS-framework MaterialUI
-```
 
 ### Technologies used:
 
